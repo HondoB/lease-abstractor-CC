@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pass 2 — Analysis Extraction",
+  "type": "object",
+  "required": ["lease_financials", "rent_schedule", "nnn_exceptions", "key_clauses", "amendments"],
+  "properties": {
+    "lease_financials": {
+      "type": "object",
+      "required": ["rent_structure", "base_rent_monthly", "base_rent_annual"],
+      "properties": {
+        "rent_structure": { "type": ["string", "null"] },
+        "base_rent_monthly": { "type": ["string", "null"] },
+        "base_rent_annual": { "type": ["string", "null"] },
+        "base_rent_psf": { "type": ["string", "null"] },
+        "rent_escalations": { "type": ["string", "null"] },
+        "free_rent_concessions": { "type": ["string", "null"] },
+        "ti_allowance": { "type": ["string", "null"] },
+        "additional_rent": { "type": ["string", "null"] },
+        "percentage_rent": { "type": ["string", "null"] },
+        "security_deposit": { "type": ["string", "null"] },
+        "total_lease_value": { "type": ["string", "null"] },
+        "late_fee": { "type": ["string", "null"] }
+      }
+    },
+    "rent_schedule": {
+      "type": "object",
+      "required": ["escalation_type", "initial_rent_psf", "leasable_sf", "initial_term_years"],
+      "properties": {
+        "escalation_type": {
+          "type": "string",
+          "enum": ["CPI", "Fixed Percentage", "Fixed Dollar", "Stepped", "Hybrid", "None"]
+        },
+        "escalation_rate": { "type": ["string", "null"] },
+        "cpi_index": { "type": ["string", "null"] },
+        "cpi_cap": { "type": ["string", "null"] },
+        "cpi_floor": { "type": ["string", "null"] },
+        "initial_rent_psf": { "type": ["string", "number", "null"] },
+        "leasable_sf": { "type": ["string", "number", "null"] },
+        "initial_term_years": { "type": ["integer", "null"] },
+        "option_periods": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": { "type": "string" },
+              "years": { "type": "integer" },
+              "escalation_type": { "type": "string" },
+              "escalation_detail": { "type": "string" }
+            }
+          }
+        },
+        "year_1_start": { "type": ["string", "null"] },
+        "year_1_end": { "type": ["string", "null"] },
+        "stated_rent_schedule": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "object",
+            "properties": {
+              "year": { "type": ["integer", "string"] },
+              "monthly_rent": { "type": ["number", "null"] },
+              "annual_rent": { "type": ["number", "null"] },
+              "rent_psf": { "type": ["number", "null"] }
+            }
+          }
+        }
+      }
+    },
+    "nnn_exceptions": {
+      "type": "object",
+      "properties": {
+        "nnn_classification": { "type": ["string", "null"] },
+        "cam_cap": { "type": ["string", "null"] },
+        "structural_roof": { "type": ["string", "null"] },
+        "capital_expenditures": { "type": ["string", "null"] },
+        "cam_exclusions": { "type": ["string", "null"] },
+        "mgmt_fee_markup": { "type": ["string", "null"] },
+        "insurance_exceptions": { "type": ["string", "null"] },
+        "utility_exceptions": { "type": ["string", "null"] },
+        "other_landlord_obligations": { "type": ["string", "null"] }
+      }
+    },
+    "key_clauses": {
+      "type": "object",
+      "properties": {
+        "holdover": { "type": ["string", "null"] },
+        "insurance": { "type": ["string", "null"] },
+        "force_majeure": { "type": ["string", "null"] },
+        "assignment_subletting": { "type": ["string", "null"] },
+        "audit_rights": { "type": ["string", "null"] },
+        "landlord_maintenance": { "type": ["string", "null"] },
+        "alterations": { "type": ["string", "null"] },
+        "landlord_work": { "type": ["string", "null"] },
+        "indemnity": { "type": ["string", "null"] },
+        "exclusive_use": { "type": ["string", "null"] }
+      }
+    },
+    "amendments": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "object",
+        "required": ["amendment_name", "summary"],
+        "properties": {
+          "amendment_name": { "type": "string" },
+          "summary": { "type": "string" }
+        }
+      }
+    }
+  }
+}

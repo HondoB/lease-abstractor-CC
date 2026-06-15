@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pass 1 — Facts Extraction",
+  "type": "object",
+  "required": ["general_info", "lease_details", "critical_dates", "contacts"],
+  "properties": {
+    "general_info": {
+      "type": "object",
+      "required": ["tenant_name", "landlord_name", "property_address", "lease_type"],
+      "properties": {
+        "tenant_name": { "type": ["string", "null"] },
+        "landlord_name": { "type": ["string", "null"] },
+        "property_address": { "type": ["string", "null"] },
+        "property_description": { "type": ["string", "null"] },
+        "suite_unit": { "type": ["string", "null"] },
+        "guarantor": { "type": ["string", "null"] },
+        "lease_type": { "type": ["string", "null"] },
+        "broker": { "type": ["string", "null"] }
+      }
+    },
+    "lease_details": {
+      "type": "object",
+      "required": ["commencement_date", "expiration_date", "lease_term", "leasable_area_sf"],
+      "properties": {
+        "execution_date": { "type": ["string", "null"] },
+        "commencement_date": { "type": ["string", "null"] },
+        "possession_date": { "type": ["string", "null"] },
+        "rent_commencement_date": { "type": ["string", "null"] },
+        "expiration_date": { "type": ["string", "null"] },
+        "lease_term": { "type": ["string", "null"] },
+        "space_type": { "type": ["string", "null"] },
+        "suite_unit_number": { "type": ["string", "null"] },
+        "leasable_area_sf": { "type": ["string", "null"] },
+        "proportionate_share": { "type": ["string", "null"] }
+      }
+    },
+    "critical_dates": {
+      "type": "object",
+      "properties": {
+        "commencement_date": { "type": ["string", "null"] },
+        "expiration_date": { "type": ["string", "null"] },
+        "renewal_option": { "type": ["string", "null"] },
+        "renewal_terms": { "type": ["string", "null"] },
+        "renewal_notice": { "type": ["string", "null"] },
+        "termination_option": { "type": ["string", "null"] },
+        "rofo_rofr": { "type": ["string", "null"] },
+        "expansion_option": { "type": ["string", "null"] }
+      }
+    },
+    "contacts": {
+      "type": "object",
+      "properties": {
+        "tenant_contact": { "type": ["string", "null"] },
+        "landlord_contact": { "type": ["string", "null"] },
+        "guarantor_contact": { "type": ["string", "null"] },
+        "property_manager": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

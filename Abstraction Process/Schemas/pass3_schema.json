@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pass 3 — Supervisor Validation",
+  "type": "object",
+  "required": ["status", "corrections", "omissions", "warnings", "cross_validation_flags", "reviewer_flags"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["approved", "corrections_needed"]
+    },
+    "corrections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["pass", "field_path", "current_value", "corrected_value", "reason"],
+        "properties": {
+          "pass": { "type": "string", "enum": ["pass1", "pass2"] },
+          "field_path": { "type": "string" },
+          "current_value": { "type": ["string", "null"] },
+          "corrected_value": { "type": ["string", "null"] },
+          "reason": { "type": "string" },
+          "lease_reference": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "omissions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["pass", "field_path", "value", "reason"],
+        "properties": {
+          "pass": { "type": "string", "enum": ["pass1", "pass2"] },
+          "field_path": { "type": "string" },
+          "value": { "type": ["string", "null"] },
+          "reason": { "type": "string" },
+          "lease_reference": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["description"],
+        "properties": {
+          "description": { "type": "string" },
+          "lease_reference": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "cross_validation_flags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["issue_group", "finding", "fields_involved", "nature_of_concern"],
+        "properties": {
+          "issue_group": { "type": "string" },
+          "finding": { "type": "string" },
+          "fields_involved": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "source_references": { "type": ["string", "null"] },
+          "nature_of_concern": {
+            "type": "string",
+            "enum": ["contradiction", "gap", "ambiguity"]
+          }
+        }
+      }
+    },
+    "reviewer_flags": {
+      "type": "array",
+      "description": "Flat list of all items the human reviewer should check. Compiled from: (1) warnings, (2) cross_validation_flags, and (3) any extracted fields containing [REVIEW]. Each entry is pre-formatted for direct population into the Reviewer Flags section of the template.",
+      "items": {
+        "type": "object",
+        "required": ["flag_type", "description"],
+        "properties": {
+          "flag_type": {
+            "type": "string",
+            "enum": ["Warning", "Cross-Validation", "[REVIEW] Field"]
+          },
+          "description": {
+            "type": "string",
+            "description": "Plain-language finding. For cross-validation: include issue group and fields involved. For [REVIEW] fields: include field name and the ambiguity. For warnings: the warning text. Always include source reference."
+          }
+        }
+      }
+    }
+  }
+}
