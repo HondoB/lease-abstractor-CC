@@ -1,7 +1,7 @@
 # Lease Abstractor
 
 A Claude skill I built that reads a commercial lease and turns it into
-astructured Excel abstract. We were struggling to get consistent outputs
+a structured Excel abstract. We were struggling to get consistent outputs
 across 50+ page leases, so I created guidelines and self-checks for
 consistency. This was used across our 80+ commercial lease portfolio to
 generate abstracts. 
